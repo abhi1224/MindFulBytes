@@ -5,14 +5,33 @@ import {BrowserRouter, createBrowserRouter, createRoutesFromElements, Route, Rou
 import Home from './pages/Home'
 import Blog from './pages/Blog'
 import App from './App.jsx'
+
+import Layout from './pages/admin/Layout.jsx'
+import Dashboard from './pages/admin/Dashboard.jsx'
+import AddBlog from './pages/admin/AddBlog.jsx'
+import ListBlog from './pages/admin/ListBlog.jsx'
+import Comment from './pages/admin/Comment.jsx'
+
 import './index.css'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path='/' element={<App/>}>
-      <Route path='/' element={<Home />} />
-      <Route path='/blog/:id' element={<Blog />} />
-    </Route>
+    <>
+      {/* Public Website Layout  */}
+      <Route path='/' element={<App/>}>
+        <Route path='/' element={<Home />} />
+        <Route path='/blog/:id' element={<Blog />} />
+      </Route>
+
+        {/* Admin Panel Layout */}
+        <Route path='/admin' element={<Layout />}>
+          <Route index element = {<Dashboard />}/>
+          <Route path='addBlog' element = {<AddBlog />}/>
+          <Route path='listBlog' element = {<ListBlog />}/>
+          <Route path='comments' element = {<Comment />}/>
+        </Route>
+      </>
+      
   )
 )
 
