@@ -23,7 +23,7 @@ function Navbar() {
         <div className="login-button">
           <button 
             onClick={() => navigate('/admin')}
-            className='flex items-center gap-2 rounded-full text-sm cursor-pointer bg-primary text-white px-10 py-2.5'
+            className='flex items-center gap-2 rounded-full text-sm cursor-pointer bg-primary text-white px-10 py-2.5 transition hover:bg-primary/80'
             >
               Login
               <img className='w-3' src={arrow} alt="arrow" />
