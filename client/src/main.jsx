@@ -11,6 +11,7 @@ import Dashboard from './pages/admin/Dashboard.jsx'
 import AddBlog from './pages/admin/AddBlog.jsx'
 import ListBlog from './pages/admin/ListBlog.jsx'
 import Comment from './pages/admin/Comment.jsx'
+import Login from './components/admin/Login.jsx'
 
 import './index.css'
 
@@ -24,7 +25,7 @@ const router = createBrowserRouter(
       </Route>
 
         {/* Admin Panel Layout */}
-        <Route path='/admin' element={<Layout />}>
+        <Route path='/admin' element={true ? <Layout /> : <Login />}>
           <Route index element = {<Dashboard />}/>
           <Route path='addBlog' element = {<AddBlog />}/>
           <Route path='listBlog' element = {<ListBlog />}/>

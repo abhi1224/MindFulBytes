@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { blog_data }  from '../assets/MindFulBytes-assests/index.js'
+import { blog_data }  from '../assets/MindFulBytes-assests/assets.js'
 import gradientBackground from '../assets/MindFulBytes-assests/gradientBackground.png'
 import Loader from '../components/Loader.jsx';
 
