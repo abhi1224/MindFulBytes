@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
     res.send("Api is working")
 })
 
-app.use('api/admin', adminRouter)
+app.use('/api/admin', adminRouter)
 
 
 const PORT = process.env.PORT || 3000
