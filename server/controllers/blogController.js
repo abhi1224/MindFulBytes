@@ -75,6 +75,21 @@ export const deleteBlogById = async (req, res) => {
     }
     return res.json({ statusCode:200, success: true, message: "Blog deleted successfully", blog });
   } catch (error) {
-    
+    return res.json({ statusCode:500, success: false, message: error.message });  
+  }
+}
+
+export const togglePublish = async (req, res) => {
+  try {
+    const { id } = req.body
+    const blog = await Blog.findById(id)
+    if(!blog){
+      return res.json({ statusCode:404, success: false, message: "Blog not found" });
+    }
+    blog.isPublished = !blog.isPublished
+    await blog.save()
+    return res.json({ statusCode:200, success: true, message: `Blog ${blog.isPublished ? "published" : "unpublished"} successfully`, blog });
+  } catch (error) {
+    return res.json({ statusCode:500, success: false, message: error.message });
   }
 }
