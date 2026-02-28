@@ -57,3 +57,16 @@ export const getAllBlogs = async (req, res) => {
   }
 }
 
+
+export const getBlogById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const blog = await Blog.findById(id);
+    if (!blog) {
+      return res.json({ statusCode:404, success: false, message: "Blog not found" });
+    }
+    return res.json({ statusCode:200, success: true, blog, message: "Blog fetched successfully" });
+  } catch (error) {
+    return res.json({ statusCode:500, success: false, message: error.message });
+  }
+}
