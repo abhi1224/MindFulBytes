@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
-import Blog from '../models/Blog.js'
-import Comment from '../models/Comment.js'
+import Blog from '../models/blogModel.js'
+import Comment from '../models/commentModel.js'
 
 export const adminController = (req, res) => {
     try {
