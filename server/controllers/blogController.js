@@ -64,3 +64,17 @@ export const getBlogById = async (req, res) => {
     return res.json({ statusCode:500, success: false, message: error.message });
   }
 }
+
+
+export const deleteBlogById = async (req, res) => {
+  try {
+    const { id } = req.body
+    const blog = await Blog.findByIdAndDelete(id);
+    if(!blog){
+      return res.json({ statusCode:404, success: false, message: "Blog not found" });
+    }
+    return res.json({ statusCode:200, success: true, message: "Blog deleted successfully", blog });
+  } catch (error) {
+    
+  }
+}
