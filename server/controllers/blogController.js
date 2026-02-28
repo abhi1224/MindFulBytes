@@ -1,6 +1,7 @@
 import imagekit from "../config/imagekit.js";
 import { toFile } from "@imagekit/nodejs";
 import Blog from "../models/blogModel.js";
+import Comment from "../models/commentModel.js";
 
 export const addBlog = async (req, res) => {  
   try {
@@ -89,6 +90,29 @@ export const togglePublish = async (req, res) => {
     blog.isPublished = !blog.isPublished
     await blog.save()
     return res.json({ statusCode:200, success: true, message: `Blog ${blog.isPublished ? "published" : "unpublished"} successfully`, blog });
+  } catch (error) {
+    return res.json({ statusCode:500, success: false, message: error.message });
+  }
+}
+
+export const addComment = async (req, res) => {
+  try {
+    const { blog, name, content } = req.body
+    if(!blog || !name || !content){
+      return res.json({ statusCode:400, success: false, message: "Required fields missing" });
+    }
+    const comment = await Comment.create({ blog, name, content })
+    return res.json({ statusCode:200, success: true, message: "Comment added successfully", comment });
+  } catch (error) {
+    return res.json({ statusCode:500, success: false, message: error.message });
+  }
+}
+
+export const getBlogComments = async (req, res) => {
+  try {
+    const { blogId } = req.body;
+    const comments = await Comment.find({ blog: blogId, isApproved: true }).sort({ createdAt: -1 });
+    return res.json({ statusCode:200, success: true, comments, message: "Comments fetched successfully" });
   } catch (error) {
     return res.json({ statusCode:500, success: false, message: error.message });
   }
